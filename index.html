@@ -12,7 +12,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -67,6 +67,7 @@
       <div class="hero-voile"></div>
       <div data-vfond='{"motif":"constellation","couleur":"#C6A15B","couleur2":"#F5F2EA","opacite":0.3,"dessous":false}'></div>
     </div>
+    <span class="hero-guillemets" aria-hidden="true"></span>
     <div class="hero-contenu">
       <p class="hero-etiquette">Incorporée depuis 2007 · Centre-ville de Montréal</p>
       <h1>Traduction juridique et technique, pour des dossiers qui n'admettent pas l'erreur</h1>
@@ -236,7 +237,11 @@
     if(el.dataset.v2){return;} el.dataset.v2='1';
     var kids=[].slice.call(el.children);
     if(kids.length<3){return;}
-    kids.forEach(function(k,i){ k.style.animation='v2rise .75s cubic-bezier(.16,1,.3,1) '+(Math.min(i,14)*85)+'ms both'; });
+    kids.forEach(function(k,i){
+      k.style.animation='v2rise .75s cubic-bezier(.16,1,.3,1) '+(Math.min(i,14)*85)+'ms both';
+      /* Libérer l'animation une fois finie : son remplissage « both » bloquerait les survols. */
+      k.addEventListener('animationend', function(){ k.style.animation=''; }, {once:true});
+    });
   }
   if('IntersectionObserver' in window){
     var ioC=new IntersectionObserver(function(es){es.forEach(function(e){

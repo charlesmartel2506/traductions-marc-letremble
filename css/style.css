@@ -12,8 +12,8 @@
   --anthracite-doux: #55524A;
   --blanc: #FFFFFF;
 
-  --police-titre: 'Fraunces', Georgia, 'Times New Roman', serif;
-  --police-texte: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --police-titre: 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
+  --police-texte: 'Public Sans', 'Segoe UI', system-ui, sans-serif;
 
   --rayon: 10px;
   --ombre: 0 10px 30px rgba(20,34,56,0.14);
@@ -177,3 +177,48 @@ p{ margin: 0 0 12px; }
   @keyframes v3ken{ from{ transform: scale(1.05); } to{ transform: scale(1.13); } }
   .hero-fond img{ animation: v3ken 26s ease-in-out infinite alternate; will-change: transform; }
 }
+
+/* ===== Rafraîchissement du 19 août 2026 — identité cabinet ===== */
+
+/* Le double filet d'un document officiel, sous le héros et au pied. */
+.hero::after,
+.pied::before{
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0; right: 0;
+  height: 7px;
+  border-top: 3px solid var(--or, #B8912E);
+  border-bottom: 1px solid var(--or, #B8912E);
+  background: transparent;
+}
+.hero::after{ bottom: 0; }
+.pied{ position: relative; }
+.pied::before{ top: 0; }
+
+/* Filigrane de guillemets — le passage d'une langue à l'autre. Décoratif. */
+.hero-guillemets{
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+  font-family: var(--police-titre);
+  color: var(--creme);
+  opacity: .10;
+}
+.hero-guillemets::before,
+.hero-guillemets::after{
+  position: absolute;
+  font-size: clamp(8rem, 18vw, 16rem);
+  line-height: 1;
+}
+.hero-guillemets::before{ content: '«'; left: 2vw; top: 8%; }
+.hero-guillemets::after{ content: '»'; right: 2vw; bottom: 6%; }
+@media (max-width: 700px){
+  .hero-guillemets::before{ font-size: 5.5rem; }
+  .hero-guillemets::after{ font-size: 5.5rem; }
+}
+
+/* Caslon : titres posés, interlettrage discret. */
+h1, h2{ letter-spacing: .005em; }
